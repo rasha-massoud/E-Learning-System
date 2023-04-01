@@ -9,6 +9,8 @@ function Enroll() {
     const [email, setEmail] = useState('');
     const [course, setCourse] = useState('');
 
+    const [enrollError, setEnrollError] = useState('');
+
     const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
@@ -24,7 +26,24 @@ function Enroll() {
     }
 
     const handleFormSubmit = (e) => {
-        
+        e.preventDefault();
+        axios.post('http://localhost:8000/api/v0.0.1/enroll', {
+            username: username,
+            email: email,
+            course: course
+        }, {
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+        .then(response => {
+            setEnrollError("Successful Enrollment!");
+        })
+        .catch(error => {
+            error.log("Enrollment Failed!");
+        });
     }
 
     return (
@@ -43,6 +62,7 @@ function Enroll() {
                 <div className="form-group">
                     <label htmlFor="course">Course:</label>
                     <input type="text" id="course" name="course" value={course} onChange={handleCourseChange} autoComplete="off" />
+                    {enrollError && <div className="error">{enrollError}</div>}
                 </div>
                 <button type="submit">Enroll</button>
             </form>

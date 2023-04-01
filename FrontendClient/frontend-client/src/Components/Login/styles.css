@@ -31,7 +31,6 @@
   gap: 5%;
 }
 
-.login-block input[type="text"],
 .login-block input[type="email"],
 .login-block input[type="password"] {
   display: block;
