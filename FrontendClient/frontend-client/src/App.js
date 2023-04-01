@@ -10,8 +10,6 @@ import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
 import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
 
-import './App.css';
-
 function App() {
   return (
     <Routes>

@@ -1,0 +1,100 @@
+.login-block {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--green);
+  width: 30%;
+  margin: 8% auto;
+  padding: 20px;
+  border-radius: 10%;
+}
+
+.logo {
+  margin-left: 25%; 
+  border-radius: 50%;
+  width: 50%;
+  height: auto;
+}
+
+.login-block h2 {
+  text-align: center;
+  margin-bottom: 7%;
+}
+
+.login-block label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+}
+
+.login-block input[type="text"],
+.login-block input[type="email"],
+.login-block input[type="password"] {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5%;
+}
+
+.login-block button[type="submit"] {
+  background-color: var(--orange);
+  color: white;
+  border: 1.5px solid var(--orange);
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.login-block button[type="button"] {
+  border: 1.5px solid var(--orange);
+  margin-left: 5%;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form-group {
+  margin-bottom: 5%;
+}
+
+.login-block button[type="submit"]:hover,
+.login-block button[type="button"]:hover {
+  border: 1.5px solid var(--light-blue);
+  background-color: var(--light-blue);
+  color: white;
+}
+
+p {
+  margin-left: 20%;
+}
+
+@media (max-width: 768px) {
+  .login-block {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
