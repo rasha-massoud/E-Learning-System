@@ -23,7 +23,7 @@ const LoginBlock = (props) => {
     if (value.length < 8 || !/[A-Z]/.test(value) || !/\d/.test(value) ||
       !/[!@#$%^&*()_+={}\[\]:;<>?,./~\-]/.test(value)) {
       setPasswordError(
-        'Password must be at least 8 characters long, contain at least one uppercase letter, one number, and one symbol'
+        'Incorrect Email or Password'
       );
     }
   };
@@ -51,12 +51,12 @@ const LoginBlock = (props) => {
         }
       })
       .catch(error => {
-        alert("Incorrect Crendetials!");
+        error.log("Incorrect Crendetials!");
       });
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (
