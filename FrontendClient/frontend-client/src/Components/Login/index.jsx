@@ -44,9 +44,6 @@ const LoginBlock = (props) => {
         localStorage.setItem('token', response.data.authorisation.token);
 
         if (response.data.status == "success") {
-          if (response.data.user.is_doctor == 1) {
-            navigate("/list_students");
-          }
           navigate("/enroll");
         }
       })
