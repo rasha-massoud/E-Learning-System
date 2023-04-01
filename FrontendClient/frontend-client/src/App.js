@@ -16,12 +16,12 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/enroll" element={<EnrollPage />} />
-      <Route path="/add_class" element={<AddClassPage />} />
-      <Route path="/list_students" element={<ListStudentsPage />} />
-      <Route path="/upload_files" element={<UploadFilesPage />} />
+      {/* <Route path="/add_class" element={<AddClassPage />} /> */}
+      {/* <Route path="/list_students" element={<ListStudentsPage />} /> */}
+      {/* <Route path="/upload_files" element={<UploadFilesPage />} /> */}
       <Route path="/view_and_download_files" element={<ViewAndDownloadFilesPage />} />
       <Route path="/withdrawal" element={<WithdrawalPage />} />
-      <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} />
+      {/* <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} /> */}
       <Route path="*" element={<div>404</div>} />
     </Routes>
   );
