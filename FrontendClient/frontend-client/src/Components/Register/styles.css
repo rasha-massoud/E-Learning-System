@@ -5,7 +5,7 @@
     width: 30%;
     margin: 8% auto;
     padding: 20px;
-    border-radius: 10%;
+    border-radius: 3%;
 }
 
 .logo {
@@ -36,11 +36,11 @@
 .register-block input[type="email"],
 .register-block input[type="password"] {
     display: block;
-    width: 100%;
-    padding: 5px;
+    width: 90%;
+    padding: 10px;
     margin-bottom: 10px;
     border: 1px solid black;
-    border-radius: 5%;
+    border-radius: 5px;
 }
 
 .register-block button[type="submit"] {
