@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "Invalid Credentials" });
 
-    const isMatched = user.matchPassword(password);
+    const isMatched = await user.matchPassword(password);
     if (!isMatched) return res.status(404).json({ message: "Invalid Credentials" });
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_KEY);
