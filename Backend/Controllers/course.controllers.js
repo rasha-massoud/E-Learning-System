@@ -24,3 +24,23 @@ exports.enroll = async (req, res) => {
 
     res.json({ course, user });
 }
+
+exports.listStudentsEnrolled = async (req, res) => {
+    try {
+        const courses = await Course.find().populate('enrolled_students', '-password').select('name -_id');
+        const enrolledStudents = courses.reduce((students, course) => {
+            const courseName = course.name;
+            const courseStudents = course.enrolled_students.map(student => {
+                const studentInfo = student.toJSON();
+                studentInfo.enrolled_courses = [courseName];
+                return studentInfo;
+            });
+            return [...students, ...courseStudents];
+        }, []);
+        res.json(enrolledStudents);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
