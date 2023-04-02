@@ -1,28 +1,26 @@
 
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import "./style.css";
+import "./styles.css";
 
 function ViewAndDownloadFiles() {
 
     const [file, setFiles] = useState([]);
-    const token = localStorage.getItem("token");
-
-    axios.get('http://localhost:8000/api/v0.0.1/view_and_download_files', {
-        headers: {
-            'content-type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-    })
-        .then(response => {
-            useEffect(() => {
-                setFiles(response.data.file);
-            }, []);
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/v0.0.1/view_and_download_files', {
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
         })
-        .catch(error => {
-            error.log("Fail!");
-        });
+            .then(response => {
+                setFiles(response.data.file);
+            })
+            .catch(error => {
+                error.log(error);
+            });
+    }, []);
 
 
     return (
