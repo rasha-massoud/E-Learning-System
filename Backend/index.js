@@ -21,6 +21,6 @@ if (cluster.isMaster) {
     app.listen(process.env.PORT, (err) => {
         if (err) console.error(err)
         console.log(`Worker ${process.pid} is running on port `, process.env.PORT);
-        require("./configs/db.config")
+        require("./Configs/db.config")
     });
 }
