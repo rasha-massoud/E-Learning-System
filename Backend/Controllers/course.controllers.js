@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Course = require("../Models/courseModel.js");
 const User = require("../Models/userModel.js");
 
@@ -10,20 +11,16 @@ exports.createCourse = async (req, res) => {
 }
 
 exports.enroll = async (req, res) => {
-    const { userId, courseId, name, description, semester } = req.body;
+    const { userId, courseId } = req.body;
 
     const user = await User.findById(userId);
     const course = await Course.findById(courseId);
 
-    course.enrolled_students.push({
-        userId
-    })
+    course.enrolled_students.push(userId)
     await course.save();
 
-    user.enrolled_courses.push({
-        courseId
-    })
+    user.enrolled_courses.push(courseId)
     await user.save();
 
-    res.json(course, user);
+    res.json({ course, user });
 }
