@@ -10,7 +10,7 @@ app.use('/auth', authRouter)
 
 const courseRouter = require("./Routes/course.routes");
 const { authMiddleware } = require("./Middlewares/auth.middleware");
-// app.use('/course', authMiddleware, courseRouter)
+app.use('/course', authMiddleware, courseRouter)
 
 if (cluster.isMaster) {
     const numCpus = OS.cpus().length;

@@ -9,12 +9,8 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    start_date: {
-        type: Date,
-        required: true
-    },
-    end_date: {
-        type: Date,
+    semester: {
+        type: String,
         required: true
     },
     enrolled_students: [{
