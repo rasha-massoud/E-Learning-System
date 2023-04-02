@@ -1,6 +1,8 @@
 const Course = require("../Models/courseModel.js");
 const User = require("../Models/userModel.js");
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 exports.createCourse = async (req, res) => {
     const { name, description, semester } = req.body;
@@ -72,6 +74,19 @@ exports.uploadFiles = async (req, res) => {
         );
 
         res.json(course);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+}
+
+exports.downloadFiles = async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.courseId);
+        const file = course.files.id(req.params.fileId);
+        const filePath = path.join(__dirname, file.url);
+        const stream = fs.createReadStream(filePath);
+        stream.pipe(res);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
