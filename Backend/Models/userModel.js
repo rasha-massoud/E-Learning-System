@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     enrolled_courses: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Courses"
+        ref: "Course"
     }],
     withdrawal_requests: [{
         course_id: {
