@@ -2,9 +2,6 @@ const Course = require("../Models/courseModel.js");
 const User = require("../Models/userModel.js");
 const multer = require('multer');
 
-const router = express.Router();
-
-
 exports.createCourse = async (req, res) => {
     const { name, description, semester } = req.body;
 
@@ -58,19 +55,16 @@ const storage = multer.diskStorage({
     }
 });
 
-// Create multer instance with specified storage
 const upload = multer({ storage: storage });
 
-// Function for handling file upload
-const uploadFiles = async (req, res) => {
-    // Create new file object with name and URL
+exports.uploadFiles = async (req, res) => {
+    upload.single('file');
     const newFile = {
         name: req.file.originalname,
         url: req.file.path
     };
 
     try {
-        // Find course by ID and push new file to files array
         const course = await Course.findByIdAndUpdate(
             req.body.courseId,
             { $push: { files: newFile } },
@@ -83,5 +77,3 @@ const uploadFiles = async (req, res) => {
         res.status(500).send('Server error');
     }
 }
-
-module.exports = uploadFiles;
