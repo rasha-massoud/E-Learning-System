@@ -92,3 +92,25 @@ exports.downloadFiles = async (req, res) => {
         res.status(500).send('Server error');
     }
 }
+
+exports.withdrawalForm = async (req, res) => {
+    const { userId, courseId } = req.body;
+
+    const user = await User.findById(userId);
+    const course = await Course.findById(courseId);
+
+    if (!course.enrolled_students.includes(userId)) {
+        return res.status(400).json({ message: 'User is not enrolled in the course.' });
+    }    
+    course.withdrawal_requests.push(userId)
+    await course.save();
+
+    user.withdrawal_requests.push(courseId)
+    await user.save();
+
+    res.json({ course, user });
+}
+
+exports.withdrawalFormStatus = async (req, res) => {
+
+}
