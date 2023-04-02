@@ -9,6 +9,9 @@ router.post("/create", createCourse);
 // router.get("/list/:id", adminMiddleware, listStudentsEnrolled);
 router.get("/list", listStudentsEnrolled);
 
+// router.post("/upload", adminMiddleware, uploadFiles);
+router.post('/upload', upload.single('file'), uploadFiles);
+
 router.post("/enroll", enroll);
 
 

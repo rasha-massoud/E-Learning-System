@@ -1,6 +1,9 @@
-const mongoose = require("mongoose");
 const Course = require("../Models/courseModel.js");
 const User = require("../Models/userModel.js");
+const multer = require('multer');
+
+const router = express.Router();
+
 
 exports.createCourse = async (req, res) => {
     const { name, description, semester } = req.body;
@@ -44,3 +47,41 @@ exports.listStudentsEnrolled = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 }
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
+    }
+});
+
+// Create multer instance with specified storage
+const upload = multer({ storage: storage });
+
+// Function for handling file upload
+const uploadFiles = async (req, res) => {
+    // Create new file object with name and URL
+    const newFile = {
+        name: req.file.originalname,
+        url: req.file.path
+    };
+
+    try {
+        // Find course by ID and push new file to files array
+        const course = await Course.findByIdAndUpdate(
+            req.body.courseId,
+            { $push: { files: newFile } },
+            { new: true }
+        );
+
+        res.json(course);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+}
+
+module.exports = uploadFiles;
