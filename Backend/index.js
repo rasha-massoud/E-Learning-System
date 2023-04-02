@@ -5,6 +5,13 @@ const app = express();
 app.use(express.json())
 require("dotenv").config();
 
+const authRouter = require("./Routes/auth.routes")
+app.use('/auth', authRouter)
+
+const courseRouter = require("./Routes/course.routes");
+const { authMiddleware } = require("./Middlewares/auth.middleware");
+app.use('/course', authMiddleware, courseRouter)
+
 if (cluster.isMaster) {
     const numCpus = OS.cpus().length;
     for (let i = 0; i < numCpus; i++) {
