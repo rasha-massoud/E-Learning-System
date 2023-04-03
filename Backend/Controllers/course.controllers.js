@@ -127,9 +127,21 @@ exports.withdrawalFormStatus = async (req, res) => {
         },
         {
             new: true
-        }
-        );
-        res.json(user);
+        });
+
+        const course = await Course.findOneAndUpdate({
+            _id: courseId,
+            'withdrawal_requests.user_id': userId
+        },
+        {
+            $set: {
+                'withdrawal_requests.$.status': status
+            }
+        },
+        {
+            new: true
+        });
+        res.json("Status updated successfully!");
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
