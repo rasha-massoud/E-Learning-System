@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Enroll() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [course, setCourse] = useState('');
+    const [courseId, setCourseId] = useState('');
 
     const [enrollError, setEnrollError] = useState('');
 
@@ -21,28 +21,26 @@ function Enroll() {
         setEmail(e.target.value);
     };
 
-    const handleCourseChange = (e) => {
-        setCourse(e.target.value);
+    const handleCourseIdChange = (e) => {
+        setCourseId(e.target.value);
     }
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/v0.0.1/enroll', {
-            username: username,
-            email: email,
-            course: course
+        axios.post('http://localhost:3000/course/enroll', {
+            userId: localStorage.getItem('id'),
+            courseId: courseId
         }, {
             headers: {
-                'content-type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'authorisation': 'Bearer ' + localStorage.getItem('token')
             }
         })
         .then(response => {
             setEnrollError("Successful Enrollment!");
         })
         .catch(error => {
-            error.log("Enrollment Failed!");
+            console.error("Enrollment Failed!");
         });
     }
 
@@ -60,8 +58,8 @@ function Enroll() {
                     <input type="email" id="email" name="email" value={email} onChange={handleEmailChange} autoComplete="off" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="course">Course:</label>
-                    <input type="text" id="course" name="course" value={course} onChange={handleCourseChange} autoComplete="off" />
+                    <label htmlFor="courseId">Course Id:</label>
+                    <input type="text" id="courseId" name="courseId" value={courseId} onChange={handleCourseIdChange} autoComplete="off" />
                     {enrollError && <div className="error">{enrollError}</div>}
                 </div>
                 <button type="submit">Enroll</button>

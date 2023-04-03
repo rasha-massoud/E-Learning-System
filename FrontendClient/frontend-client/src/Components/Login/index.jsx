@@ -40,8 +40,7 @@ const LoginBlock = (props) => {
       }
     })
       .then(response => {
-        console.log(response);
-        localStorage.setItem('id', JSON.stringify(response.data.user._id));
+        localStorage.setItem('id', response.data.user._id);
         localStorage.setItem('token', response.data.token);
 
         if (localStorage.getItem('token')) {
