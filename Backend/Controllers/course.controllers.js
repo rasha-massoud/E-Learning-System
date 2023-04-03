@@ -116,23 +116,19 @@ exports.withdrawalFormStatus = async (req, res) => {
     const { userId, courseId, status } = req.body;
 
     try {
-        const course = await Course.findById(courseId);
-        if (!course) {
-            return res.status(404).json({ message: 'Course not found' });
+        const user = await User.findOneAndUpdate({
+            _id: userId,
+            'withdrawal_requests.course_id': courseId
+        },
+        {
+            $set: {
+                'withdrawal_requests.$.status': status
+            }
+        },
+        {
+            new: true
         }
-
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        const index = course.withdrawal_requests?.findIndex((request) => {
-            return request.course_id.equals(courseId) && request.status === 'Pending';
-        });
-
-        user.withdrawal_requests[withdrawalRequestIndex].status = status;
-        await user.save();
-
+        );
         res.json(user);
     } catch (error) {
         console.error(error);

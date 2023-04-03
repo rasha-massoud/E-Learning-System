@@ -6,5 +6,5 @@ exports.adminMiddleware = async (req, res, next) => {
 
   if (user.role === "admin") return next()
 
-  return res.status(401).json({ message: "Unauthorized" })
+  return res.status(401).json({ message: `Unauthorized` })
 }
