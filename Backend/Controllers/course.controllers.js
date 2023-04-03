@@ -19,6 +19,10 @@ exports.enroll = async (req, res) => {
     const user = await User.findById(userId);
     const course = await Course.findById(courseId);
 
+    if (user.enrolled_courses.includes(courseId)) {
+        return res.status(400).json({ message: 'User is already enrolled in this course' });
+    }
+
     course.enrolled_students.push(userId)
     await course.save();
 
@@ -120,27 +124,27 @@ exports.withdrawalFormStatus = async (req, res) => {
             _id: userId,
             'withdrawal_requests.course_id': courseId
         },
-        {
-            $set: {
-                'withdrawal_requests.$.status': status
-            }
-        },
-        {
-            new: true
-        });
+            {
+                $set: {
+                    'withdrawal_requests.$.status': status
+                }
+            },
+            {
+                new: true
+            });
 
         const course = await Course.findOneAndUpdate({
             _id: courseId,
             'withdrawal_requests.user_id': userId
         },
-        {
-            $set: {
-                'withdrawal_requests.$.status': status
-            }
-        },
-        {
-            new: true
-        });
+            {
+                $set: {
+                    'withdrawal_requests.$.status': status
+                }
+            },
+            {
+                new: true
+            });
         res.json("Status updated successfully!");
     } catch (error) {
         console.error(error);
