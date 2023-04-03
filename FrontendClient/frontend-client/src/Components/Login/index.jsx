@@ -30,7 +30,7 @@ const LoginBlock = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/api/v0.0.1/login', {
+    axios.post('http://localhost:3000/auth/login', {
       email: email,
       password: password
     }, {
@@ -48,7 +48,7 @@ const LoginBlock = (props) => {
         }
       })
       .catch(error => {
-        error.log("Incorrect Crendetials!");
+        console.error("Incorrect Crendetials!");
       });
   };
 
