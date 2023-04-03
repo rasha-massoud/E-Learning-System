@@ -121,18 +121,21 @@ exports.withdrawalFormStatus = async (req, res) => {
             return res.status(404).json({ message: 'Course not found' });
         }
 
-        if (!course.withdrawal_requests.includes(userId)) return res.status(400).json({ message: 'No request.' });
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-        course.withdrawal_requests.push({ user_id: userId })
-        await course.save();
+        const index = course.withdrawal_requests?.findIndex((request) => {
+            return request.course_id.equals(courseId) && request.status === 'Pending';
+        });
 
-        user.withdrawal_requests.pull({ status: status })
-        user.withdrawalRequest.push = status;
-        await course.save();
+        user.withdrawal_requests[withdrawalRequestIndex].status = status;
+        await user.save();
 
-        res.json(course);
+        res.json(user);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
-}
+};

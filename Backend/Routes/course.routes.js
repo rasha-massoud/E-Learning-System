@@ -3,14 +3,11 @@ const { createCourse, enroll, listStudentsEnrolled, uploadFiles, downloadFiles, 
 const { adminMiddleware } = require("../Middlewares/admin.middleware");
 const router = Router();
 
-// router.post("/create", adminMiddleware, createCourse);
-router.post("/create", createCourse);
+router.post("/create", adminMiddleware, createCourse);
 
-// router.get("/list/:id", adminMiddleware, listStudentsEnrolled);
-router.get("/list", listStudentsEnrolled);
+router.get("/list", adminMiddleware, listStudentsEnrolled);
 
-// router.post("/upload", adminMiddleware, uploadFiles);
-router.post('/upload', uploadFiles);
+router.post("/upload", adminMiddleware, uploadFiles);
 
 router.get('/download/:courseId/files/:fileId', downloadFiles)
 
@@ -18,8 +15,6 @@ router.post("/enroll", enroll);
 
 router.post("/withdrawal_form", withdrawalForm);
 
-// router.post("/withdrawal_form_status", adminMiddleware, withdrawalFormStatus);
-router.post("/withdrawal_form_status", withdrawalFormStatus);
-
+router.post("/withdrawal_form_status", adminMiddleware, withdrawalFormStatus);
 
 module.exports = router;
