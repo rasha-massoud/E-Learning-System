@@ -51,7 +51,7 @@ const RegisterBlock = () => {
     const handleFormSubmit = (e) => {
 
         e.preventDefault();
-        axios.post('http://127.0.0.1:8000/api/v0.0.1/register', {
+        axios.post('http://localhost:3000/auth/register', {
             'username': username,
             'email': email,
             'password': password
