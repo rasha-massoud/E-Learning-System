@@ -3,12 +3,12 @@ import { Routes, Route, Router } from "react-router-dom"
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import EnrollPage from "./Pages/EnrollPage";
-import AddClassPage from "./Pages/AddClassPage";
-import ListStudentsPage from "./Pages/ListStudentsPage";
-import UploadFilesPage from "./Pages/UploadFilesPage";
+// import AddClassPage from "./Pages/AddClassPage";
+// import ListStudentsPage from "./Pages/ListStudentsPage";
+// import UploadFilesPage from "./Pages/UploadFilesPage";
 import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
-import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
+// import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
 
 function App() {
   return (
