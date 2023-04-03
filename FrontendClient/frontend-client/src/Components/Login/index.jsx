@@ -40,10 +40,11 @@ const LoginBlock = (props) => {
       }
     })
       .then(response => {
-        localStorage.setItem('id', JSON.stringify(response.data.user.id));
-        localStorage.setItem('token', response.data.authorisation.token);
+        console.log(response);
+        localStorage.setItem('id', JSON.stringify(response.data.user._id));
+        localStorage.setItem('token', response.data.token);
 
-        if (response.data.status == "success") {
+        if (localStorage.getItem('token')) {
           navigate("/enroll");
         }
       })
