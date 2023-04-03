@@ -1,5 +1,6 @@
 const Course = require("../Models/courseModel.js");
 const User = require("../Models/userModel.js");
+const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
@@ -74,8 +75,8 @@ exports.uploadFiles = async (req, res) => {
         );
 
         res.json(course);
-    } catch (err) {
-        console.error(err);
+    }
+    catch (err) {
         res.status(500).send('Server error');
     }
 }
@@ -87,7 +88,8 @@ exports.downloadFiles = async (req, res) => {
         const filePath = path.join(__dirname, file.url);
         const stream = fs.createReadStream(filePath);
         stream.pipe(res);
-    } catch (err) {
+    }
+    catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
@@ -99,18 +101,38 @@ exports.withdrawalForm = async (req, res) => {
     const user = await User.findById(userId);
     const course = await Course.findById(courseId);
 
-    if (!course.enrolled_students.includes(userId)) {
-        return res.status(400).json({ message: 'User is not enrolled in the course.' });
-    }    
-    course.withdrawal_requests.push(userId)
+    if (!course.enrolled_students.includes(userId)) return res.status(400).json({ message: 'User is not enrolled in the course.' });
+
+    course.withdrawal_requests.push({ user_id: userId })
     await course.save();
 
-    user.withdrawal_requests.push(courseId)
+    user.withdrawal_requests.push({ course_id: courseId })
     await user.save();
 
     res.json({ course, user });
 }
 
 exports.withdrawalFormStatus = async (req, res) => {
+    const { userId, courseId, status } = req.body;
 
+    try {
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+        if (!course.withdrawal_requests.includes(userId)) return res.status(400).json({ message: 'No request.' });
+
+        course.withdrawal_requests.push({ user_id: userId })
+        await course.save();
+
+        user.withdrawal_requests.pull({ status: status })
+        user.withdrawalRequest.push = status;
+        await course.save();
+
+        res.json(course);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }

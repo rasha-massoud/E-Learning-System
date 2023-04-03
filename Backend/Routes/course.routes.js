@@ -19,7 +19,7 @@ router.post("/enroll", enroll);
 router.post("/withdrawal_form", withdrawalForm);
 
 // router.post("/withdrawal_form_status", adminMiddleware, withdrawalFormStatus);
-router.post("//withdrawal_form_status", withdrawalFormStatus);
+router.post("/withdrawal_form_status", withdrawalFormStatus);
 
 
 module.exports = router;
