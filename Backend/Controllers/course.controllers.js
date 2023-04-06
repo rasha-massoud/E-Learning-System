@@ -50,51 +50,41 @@ exports.listStudentsEnrolled = async (req, res) => {
     }
 }
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
-    }
-});
-
-const upload = multer({ storage: storage });
-
 exports.uploadFiles = async (req, res) => {
-    upload.single('file');
-    const newFile = {
-        name: req.file.originalname,
-        url: req.file.path
-    };
 
     try {
-        const course = await Course.findByIdAndUpdate(
-            req.body.courseId,
-            { $push: { files: newFile } },
-            { new: true }
-        );
+        if (!req.files || !req.files.file) return res.status(400).send('No file uploaded');
 
-        res.json(course);
+        const file = req.files.file;
+
+        const uploadPath = path.join(__dirname, '..', 'Uploads', file.name);
+        file.mv(uploadPath, function (err) {
+            if (err) return res.status(500).send('Error while saving file');
+
+            const newFile = {
+                name: file.name,
+                type: file.mimetype,
+                url: `/uploads/${file.name}`
+            };
+
+            Course.findByIdAndUpdate(req.body.course_id, {
+                $push: { files: newFile }
+            },
+                { new: true },
+                function (err, course) {
+                    if (err) return res.status(500).send('Error while updating course');
+
+                    res.send('File uploaded and saved successfully');
+                });
+        });
     }
     catch (err) {
-        res.status(500).send('Server error');
+        res.status(500).send('Error while uploading file');
     }
 }
 
 exports.downloadFiles = async (req, res) => {
-    try {
-        const course = await Course.findById(req.params.courseId);
-        const file = course.files.id(req.params.fileId);
-        const filePath = path.join(__dirname, file.url);
-        const stream = fs.createReadStream(filePath);
-        stream.pipe(res);
-    }
-    catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
-    }
+
 }
 
 exports.withdrawalForm = async (req, res) => {

@@ -4,7 +4,11 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const fileUpload = require("express-fileupload");
+const mv = require('mv');
+const path = require("path");
+
 app.use(express.json())
+app.use(fileUpload());
 
 require("dotenv").config();
 
