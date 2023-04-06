@@ -70,15 +70,15 @@ exports.uploadFiles = async (req, res) => {
             Course.findByIdAndUpdate(req.body.courseId, {
                 $push: { files: newFile }
             },
-                { new: true },
-                function (err, course) {
-                    if (err) return res.status(500).send('Error while updating course');
-
+                { new: true })
+                .then((course) => {
                     res.send('File uploaded and saved successfully');
+                })
+                .catch((err) => {
+                    res.status(500).send('Error while updating course');
                 });
         });
-    }
-    catch (err) {
+    } catch (err) {
         res.status(500).send('Error while uploading file');
     }
 }

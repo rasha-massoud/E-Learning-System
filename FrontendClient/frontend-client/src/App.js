@@ -5,7 +5,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import EnrollPage from "./Pages/EnrollPage";
 // import AddClassPage from "./Pages/AddClassPage";
 // import ListStudentsPage from "./Pages/ListStudentsPage";
-// import UploadFilesPage from "./Pages/UploadFilesPage";
+import UploadFilesPage from "./Pages/UploadFilesPage";
 import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
 // import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
@@ -18,7 +18,7 @@ function App() {
       <Route path="/enroll" element={<EnrollPage />} />
       {/* <Route path="/add_class" element={<AddClassPage />} /> */}
       {/* <Route path="/list_students" element={<ListStudentsPage />} /> */}
-      {/* <Route path="/upload" element={<UploadFilesPage />} /> */}
+      <Route path="/upload" element={<UploadFilesPage />} />
       <Route path="/download" element={<ViewAndDownloadFilesPage />} />
       <Route path="/withdrawal" element={<WithdrawalPage />} />
       {/* <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} /> */}
