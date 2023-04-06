@@ -2,9 +2,11 @@ const cluster = require("cluster");
 const OS = require("os")
 const express = require("express");
 const app = express();
-app.use(express.json())
-require("dotenv").config();
 const cors = require('cors');
+const fileUpload = require("express-fileupload");
+app.use(express.json())
+
+require("dotenv").config();
 
 app.use(cors({ origin: 'http://localhost:3001' }));
 app.use((req, res, next) => {
