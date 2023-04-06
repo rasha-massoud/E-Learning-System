@@ -18,8 +18,8 @@ function App() {
       <Route path="/enroll" element={<EnrollPage />} />
       {/* <Route path="/add_class" element={<AddClassPage />} /> */}
       {/* <Route path="/list_students" element={<ListStudentsPage />} /> */}
-      {/* <Route path="/upload_files" element={<UploadFilesPage />} /> */}
-      <Route path="/view_and_download_files" element={<ViewAndDownloadFilesPage />} />
+      {/* <Route path="/upload" element={<UploadFilesPage />} /> */}
+      <Route path="/download" element={<ViewAndDownloadFilesPage />} />
       <Route path="/withdrawal" element={<WithdrawalPage />} />
       {/* <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} /> */}
       <Route path="*" element={<div>404</div>} />

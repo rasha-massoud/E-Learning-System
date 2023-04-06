@@ -85,6 +85,11 @@ exports.uploadFiles = async (req, res) => {
 
 exports.downloadFiles = async (req, res) => {
     try {
+        const { userId, courseId } = req.params;
+        const course = await Course.findById(courseId);
+
+        if (!course.enrolled_students.includes(userId)) return res.status(400).json({ message: 'User is not enrolled in the course.' });
+
         const fileUrl = req.query.url;
         if (!fileUrl) return res.status(400).send('File URL is missing');
 
