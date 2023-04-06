@@ -67,7 +67,7 @@ exports.uploadFiles = async (req, res) => {
                 url: `/uploads/${file.name}`
             };
 
-            Course.findByIdAndUpdate(req.body.course_id, {
+            Course.findByIdAndUpdate(req.body.courseId, {
                 $push: { files: newFile }
             },
                 { new: true },
@@ -84,7 +84,15 @@ exports.uploadFiles = async (req, res) => {
 }
 
 exports.downloadFiles = async (req, res) => {
+    try {
+        const fileUrl = req.query.url;
+        if (!fileUrl) return res.status(400).send('File URL is missing');
 
+        const filePath = path.join(__dirname, '..', 'Uploads', fileUrl.substring(fileUrl.lastIndexOf('/') + 1));
+        res.download(filePath);
+    } catch (err) {
+        res.status(500).send('Error while downloading file');
+    }
 }
 
 exports.withdrawalForm = async (req, res) => {
