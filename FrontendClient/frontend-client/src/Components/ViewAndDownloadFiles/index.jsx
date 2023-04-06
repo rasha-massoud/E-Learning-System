@@ -56,12 +56,7 @@ function ViewAndDownloadFiles() {
         <div>
             <h1 className="title">FILES</h1>
             <div className="container">
-                {files.map(file => (
-                    <div key={file.id} className="box1">
-                        <h2 className="center">{file.id}</h2>
-                        <button onClick={() => handleDownload(file.id)}>Download</button>
-                    </div>
-                ))}
+                
             </div>
         </div>
     );

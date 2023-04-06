@@ -16,6 +16,8 @@ exports.authMiddleware = async (req, res, next) => {
         next();
     }
     catch (e) {
-        return res.status(500).json({ message: "Server Error" })
+        console.log(req.headers.authorisation);
+
+        return res.status(500).json({ message: `Server Error`});
     }
 }
