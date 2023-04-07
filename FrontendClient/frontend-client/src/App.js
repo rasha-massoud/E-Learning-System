@@ -3,7 +3,7 @@ import { Routes, Route, Router } from "react-router-dom"
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import EnrollPage from "./Pages/EnrollPage";
-// import ListStudentsPage from "./Pages/ListStudentsPage";
+import ListStudentPage from "./Pages/ListStudentPage";
 import UploadFilesPage from "./Pages/UploadFilesPage";
 import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
@@ -17,7 +17,7 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/enroll" element={<EnrollPage />} />
       <Route path="/create" element={<CreateCoursePage />} />
-      {/* <Route path="/list_students" element={<ListStudentsPage />} /> */}
+      <Route path="/list" element={<ListStudentPage />} />
       <Route path="/upload" element={<UploadFilesPage />} />
       <Route path="/download" element={<ViewAndDownloadFilesPage />} />
       <Route path="/withdrawal" element={<WithdrawalPage />} />
