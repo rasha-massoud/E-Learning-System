@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./styles.css";
 
 const UploadFiles = () => {
     const [file, setFile] = useState(null);
@@ -43,19 +44,24 @@ const UploadFiles = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Course ID:
-                <input type="text" value={courseId} onChange={handleCourseIdChange} />
-            </label>
-            <br />
-            <label>
-                File:
-                <input type="file" onChange={handleFileChange} />
-            </label>
-            <br />
-            <button type="submit">Upload</button>
-        </form>
+        <div className="upload-block">
+            <h2>Upload Files</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Course ID:
+                    <input type="text" value={courseId} onChange={handleCourseIdChange} />
+                </label>
+                <br />
+                <label>
+                    File:
+                    <input type="file" onChange={handleFileChange} />
+                </label>
+                <br />
+                <div className="buttons">   
+                    <button type="submit">Upload</button>
+                </div>
+            </form>
+        </div>
     );
 };
 
