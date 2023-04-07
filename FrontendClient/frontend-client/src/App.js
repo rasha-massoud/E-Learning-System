@@ -8,7 +8,7 @@ import UploadFilesPage from "./Pages/UploadFilesPage";
 import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
 import CreateCoursePage from './Pages/CreateCoursePage';
-// import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
+import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <Route path="/upload" element={<UploadFilesPage />} />
       <Route path="/download" element={<ViewAndDownloadFilesPage />} />
       <Route path="/withdrawal" element={<WithdrawalPage />} />
-      {/* <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} /> */}
+      <Route path="/withdrawal_status" element={<WithdrawalStatusPage />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
   );
