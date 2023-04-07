@@ -8,7 +8,7 @@ const mv = require('mv');
 const path = require("path");
 
 app.use(express.json())
-app.use(fileUpload());
+app.use(fileUpload({maxFileSize: 10 * 1024 * 1024}));
 
 require("dotenv").config();
 

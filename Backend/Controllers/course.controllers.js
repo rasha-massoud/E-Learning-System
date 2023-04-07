@@ -67,12 +67,19 @@ exports.uploadFiles = async (req, res) => {
                 url: `/uploads/${file.name}`
             };
 
+            console.log('req.body.courseId:', req.body.courseId);
             Course.findByIdAndUpdate(req.body.courseId, {
                 $push: { files: newFile }
             },
                 { new: true })
                 .then((course) => {
-                    res.send('File uploaded and saved successfully');
+                    course.save()
+                        .then(() => {
+                            res.send('File uploaded and saved successfully');
+                        })
+                        .catch((err) => {
+                            res.status(500).send('Error while saving course');
+                        });
                 })
                 .catch((err) => {
                     res.status(500).send('Error while updating course');

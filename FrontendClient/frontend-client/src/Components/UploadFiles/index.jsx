@@ -20,14 +20,12 @@ const UploadFiles = () => {
         formData.append("file", file);
         formData.append("courseId", courseId);
 
-        console.log(courseId, file, localStorage.getItem('token')
-        )
         try {
             const response = await axios.post("http://localhost:3000/course/upload", formData,
                 {
                     headers: {
-                        // 'content-type': 'application/json',
-                        // 'Accept': 'application/json',
+                        'content-type': 'application/json',
+                        'Accept': 'application/json',
                         'Content-Type': 'multipart/form-data',
                         'authorisation': 'Bearer ' + localStorage.getItem('token')
                     },
