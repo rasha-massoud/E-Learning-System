@@ -3,11 +3,11 @@ import { Routes, Route, Router } from "react-router-dom"
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import EnrollPage from "./Pages/EnrollPage";
-// import AddClassPage from "./Pages/AddClassPage";
 // import ListStudentsPage from "./Pages/ListStudentsPage";
 import UploadFilesPage from "./Pages/UploadFilesPage";
 import ViewAndDownloadFilesPage from "./Pages/ViewAndDownloadFilesPage";
 import WithdrawalPage from "./Pages/WithdrawalPage";
+import CreateCoursePage from './Pages/CreateCoursePage';
 // import WithdrawalStatusPage from "./Pages/WithdrawalStatusPage";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/enroll" element={<EnrollPage />} />
-      {/* <Route path="/add_class" element={<AddClassPage />} /> */}
+      <Route path="/create" element={<CreateCoursePage />} />
       {/* <Route path="/list_students" element={<ListStudentsPage />} /> */}
       <Route path="/upload" element={<UploadFilesPage />} />
       <Route path="/download" element={<ViewAndDownloadFilesPage />} />
