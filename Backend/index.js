@@ -27,6 +27,8 @@ const courseRouter = require("./Routes/course.routes");
 const { authMiddleware } = require("./Middlewares/auth.middleware");
 app.use('/course', authMiddleware, courseRouter)
 
+app.use("/uploads",authMiddleware, express.static(__dirname+"/Uploads"))
+
 if (cluster.isMaster) {
     const numCpus = OS.cpus().length;
     for (let i = 0; i < numCpus; i++) {

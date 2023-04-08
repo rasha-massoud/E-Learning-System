@@ -17,11 +17,9 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    files: [{
-        name: String,
-        type: String,
-        url: String
-    }],
+    files: [
+        Object
+    ],
     withdrawal_requests: [{
         user_id: {
             type: mongoose.Schema.Types.ObjectId,

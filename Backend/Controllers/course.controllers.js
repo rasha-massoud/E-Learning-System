@@ -59,7 +59,10 @@ exports.uploadFiles = async (req, res) => {
 
         const uploadPath = path.join(__dirname, '..', 'Uploads', file.name);
         file.mv(uploadPath, function (err) {
-            if (err) return res.status(500).send('Error while saving file');
+    
+            if (err) {
+                return res.status(500).send('Error while saving file');
+            }
 
             const newFile = {
                 name: file.name,
@@ -91,20 +94,8 @@ exports.uploadFiles = async (req, res) => {
 }
 
 exports.downloadFiles = async (req, res) => {
-    try {
-        const { userId, courseId } = req.params;
-        const course = await Course.findById(courseId);
-
-        if (!course.enrolled_students.includes(userId)) return res.status(400).json({ message: 'User is not enrolled in the course.' });
-
-        const fileUrl = req.query.url;
-        if (!fileUrl) return res.status(400).send('File URL is missing');
-
-        const filePath = path.join(__dirname, '..', 'Uploads', fileUrl.substring(fileUrl.lastIndexOf('/') + 1));
-        res.download(filePath);
-    } catch (err) {
-        res.status(500).send('Error while downloading file');
-    }
+    //On click Yeftah URL (FE)
+    //REDIRECTORY (BE)
 }
 
 exports.withdrawalForm = async (req, res) => {
