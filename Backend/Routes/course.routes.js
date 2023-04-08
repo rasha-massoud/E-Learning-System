@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createCourse, enroll, listStudentsEnrolled, uploadFiles, downloadFiles, withdrawalForm, withdrawalFormStatus } = require("../Controllers/course.controllers");
+const { createCourse, enroll, listStudentsEnrolled, uploadFiles, getAllFiles, downloadFiles, withdrawalForm, withdrawalFormStatus } = require("../Controllers/course.controllers");
 const { adminMiddleware } = require("../Middlewares/admin.middleware");
 const router = Router();
 
@@ -9,6 +9,7 @@ router.get("/list", adminMiddleware, listStudentsEnrolled);
 
 router.post("/upload", adminMiddleware, uploadFiles);
 
+router.get('/files/:courseId', getAllFiles)
 router.get('/download/:courseId/files/:fileId', downloadFiles)
 
 router.post("/enroll", enroll);

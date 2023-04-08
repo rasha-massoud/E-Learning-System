@@ -11,23 +11,6 @@ function ViewAndDownloadFiles() {
         setCourseId(e.target.value);
     }
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        // axios.post('http://localhost:3000/course/enroll', {
-        //     courseId: courseId
-        // }, {
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'authorisation': 'Bearer ' + localStorage.getItem('token')
-        //     }
-        // })
-        // .then(response => {
-        // })
-        // .catch(error => {
-        //     console.error("Enrollment Failed!");
-        // });
-    }
-
     // const handleDownload = (fileUrl) => {
     //     axios.get(`http://localhost:3000/download/${courseId}/files/${fileUrl}`, {
     //         headers: {
@@ -50,30 +33,33 @@ function ViewAndDownloadFiles() {
     // };
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/course/files/${courseId}`, {
+        axios.get(`http://localhost:3000/course/files/${courseId.toString()}`, {
             headers: {
                 'Accept': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
+                'authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+            responseType: 'blob'
+
         })
             .then(response => {
                 setFiles(response.data);
             })
             .catch(error => {
-                console.error(error);
+                console.error("Error 1" + error);
             });
     }, [courseId]);
 
     return (
         <div className="download-block">
             <h2>FILES</h2>
-            <form onSubmit={handleFormSubmit}>
+            <form >
                 <div className="form-group">
                     <label htmlFor="courseId">Course Id:</label>
                     <input type="text" id="courseId" name="courseId" value={courseId} onChange={handleCourseIdChange} autoComplete="off" />
                 </div>
                 <div className="buttons">
-                    <button type="submit">Get Files</button>   
+                    {/* <button type="submit">Get Files</button> */}
                 </div>
             </form>
         </div>

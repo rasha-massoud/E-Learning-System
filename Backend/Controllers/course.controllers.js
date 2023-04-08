@@ -59,7 +59,7 @@ exports.uploadFiles = async (req, res) => {
 
         const uploadPath = path.join(__dirname, '..', 'Uploads', file.name);
         file.mv(uploadPath, function (err) {
-    
+
             if (err) {
                 return res.status(500).send('Error while saving file');
             }
@@ -91,6 +91,15 @@ exports.uploadFiles = async (req, res) => {
     } catch (err) {
         res.status(500).send('Error while uploading file');
     }
+}
+
+exports.getAllFiles = async (req, res) => {
+    const courseId = req.params.courseId;
+    const course = await Course.findById(courseId);
+    if (!course) return res.status(400).json({ message: "Course not found!" });
+
+    const files = course.files;
+    res.json({ files });
 }
 
 exports.downloadFiles = async (req, res) => {
